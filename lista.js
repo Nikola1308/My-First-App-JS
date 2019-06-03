@@ -99,7 +99,7 @@ class Card {
     generateDoneCard(){
         let div2=document.createElement('div')
         div2.id = this._index
-        div2.className = "cardstyle"
+        div2.className = "cardstyle1"
         carDone.appendChild(div2)
         //p
         let card2 = document.createElement('p') 

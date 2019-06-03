@@ -81,6 +81,18 @@ h2{
     animation-name: cardanimation;
     animation-duration: 2s;
 }
+.cardstyle1 {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow:10px 10px 5px rgba(255, 255, 255, 0.411);
+    padding: 10px 0;
+    letter-spacing: 4px;
+    font-weight: 500;
+    border: 0.5px solid rgba(0, 0, 0, 0.075);
+    border-radius: 3%;
+    animation-name: cardanimation1;
+    animation-duration: 2s;
+}
 .buttonstyle {
     text-transform: uppercase;
     word-spacing: 3px;
@@ -133,7 +145,18 @@ h2{
 @keyframes cardanimation{
     0%{
         opacity: 0;
-        transform: translateX(-120%);
+        transform: translateX(-65%);
+   }
+   
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+   }
+ }
+ @keyframes cardanimation1{
+    0%{
+        opacity: 0;
+        transform: translateX(65%);
    }
    
     100%{

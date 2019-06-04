@@ -79,7 +79,7 @@ class Card {
             arrDone.push(object2)
             this.generateDoneCard(object2)
             carddoneh3.textContent = `U have ${arrDone.length} finished tasks.`
-            deleteCard(this._index)
+            arr=deleteteForAll(this._index,arr,card,"arr")
             cardH3.textContent = `U have ${arr.length} tasks left.`
         })
         div1.appendChild(btn1)
@@ -88,7 +88,7 @@ class Card {
         btn2.textContent = "Delete Task"
         btn2.className = "buttonstyle"
         btn2.addEventListener('click',()=>{
-             deleteCard(this._index)
+            arr=deleteteForAll(this._index,arr,card,"arr")
              cardH3.textContent = `U have ${arr.length} tasks left.`
         })
        div1.appendChild(btn2)
@@ -120,7 +120,7 @@ class Card {
                 const object3 = {index:this._index,value:this._value}
                 arrTrash.push(object3)
                 this.generateDeletedCards(object3)
-                deleteCardDone(this._index)
+                arrDone = deleteteForAll(this._index,arrDone,carDone,"arrDone")
                 carddoneh3.textContent = `U have ${arrDone.length} finished tasks.`
             }else{
                 alert('Please mark check box if u realy want to delete this item.')
@@ -147,7 +147,7 @@ class Card {
         btn3a.addEventListener('click',()=>{
             const object2 ={index:this._index,value:this._value}
             arrDone.push(object2)
-            deleteCardTrash(this._index)
+           arrTrash = deleteteForAll(this._index,arrTrash,cardTrash,"arrTrash")
             this.generateDoneCard(object2)
             carddoneh3.textContent = `U have ${arrDone.length} finished tasks.`
             
@@ -158,7 +158,7 @@ class Card {
         btn3b.textContent = "Delete Totaly"
         btn3b.className = "buttonstyle"
         btn3b.addEventListener('click',()=>{
-            deleteCardTrash(this._index)
+           arrTrash = deleteteForAll(this._index,arrTrash,cardTrash,"arrTrash")
         })
         div3.appendChild(btn3b)
         this.card = div3
@@ -168,7 +168,7 @@ class Card {
         return this.card
     }
 }
-let retriveCards = document.getElementById('retrevecards')
+    let retriveCards = document.getElementById('retrevecards')
     retriveCards.addEventListener('click',function(){
         arrTrash = JSON.parse(localStorage.getItem("arrTrash"))
         arrTrash.map((arTrash)=>{
@@ -178,41 +178,23 @@ let retriveCards = document.getElementById('retrevecards')
         })
         
     })
+    function deleteteForAll(indexx,arrAll,cardAll,arrName){ 
+        let a = document.getElementById(indexx)
+        cardAll.removeChild(a)
+        const newArrAll = arrAll.filter(arAll => arAll.index !== indexx) 
+        localStorage.setItem("arrTrash",JSON.stringify(arrTrash));
+        localStorage.setItem("arrDone",JSON.stringify(arrDone)); 
+        localStorage.setItem(arrName,JSON.stringify(newArrAll));      
+        return newArrAll;
 
-function deleteCard(indexForSelect){
-    let a = document.getElementById(indexForSelect)
-        arr = arr.filter(ar => ar.index !== indexForSelect)
-        card.removeChild(a)  
-        localStorage.setItem("arr",JSON.stringify(arr));
-        localStorage.setItem("arrDone",JSON.stringify(arrTrash)) 
-        localStorage.setItem("arrDone",JSON.stringify(arrDone))  
-        return a       
-} 
-function deleteCardDone(indexForSelectDone){
-    let a = document.getElementById(indexForSelectDone)
-        carDone.removeChild(a)
-        arrDone = arrDone.filter(ar => ar.index !== indexForSelectDone)   
-        localStorage.setItem("arr",JSON.stringify(arr));    
-        localStorage.setItem("arrTrash",JSON.stringify(arrTrash)) 
-        localStorage.setItem("arrDone",JSON.stringify(arrDone))
-        return a  
-}
-function deleteCardTrash(indexForSelectTrash){
-    let a = document.getElementById(indexForSelectTrash)
-        cardTrash.removeChild(a)
-        arrTrash = arrTrash.filter(arTrash => arTrash.index !== indexForSelectTrash)
-        localStorage.setItem("arrDone",JSON.stringify(arrDone))
-        localStorage.setItem("arrTrash",JSON.stringify(arrTrash))
-        localStorage.setItem("arrDone",JSON.stringify(arrDone))
-        return a
-}
+    }
 
-function setCard({index,value}){
+    function setCard({index,value}){
     const class1 = new Card(index,value)
     const myCard = class1.generateCard().getCard()
     card.appendChild(myCard)
     localStorage.setItem("arr",JSON.stringify(arr))
     input.value = ''  
-}
+    }
 
 

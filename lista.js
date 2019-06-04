@@ -25,6 +25,9 @@ window.addEventListener('load',()=>{
         return class3.generateDoneCard().getCard()
         })
     }
+    if(localStorage.arrTrash){
+        arrTrash = JSON.parse(localStorage.getItem("arrTrash"))
+    }
     cardH3.textContent = `U have ${arr.length} tasks left.`
     carddoneh3.textContent = `U have ${arrDone.length} finished tasks.` 
     console.log('Page was loaded')
